@@ -2,11 +2,15 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Logging;
 using Microsoft.OpenApi.Models;
+using MyWorkProduct.DataAccess.Context;
+using MyWorkProduct.Web.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,8 +30,9 @@ namespace MyWorkProduct.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.ConfigureRepositoryWrapper();
             services.AddControllers();
+            services.AddDbContext<MyWorkProductDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MyWorkProduct.Web", Version = "v1" });
@@ -39,6 +44,7 @@ namespace MyWorkProduct.Web
         {
             if (env.IsDevelopment())
             {
+                IdentityModelEventSource.ShowPII = true;
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyWorkProduct.Web v1"));
