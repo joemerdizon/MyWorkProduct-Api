@@ -5,16 +5,16 @@ using System.Collections.Generic;
 
 namespace MyWorkProduct.DataAccess.Models
 {
-    public partial class TemplateTaskCategory
+    public class TemplateTaskCategory
     {
-        public TemplateTaskCategory()
-        {
-            InverseParent = new HashSet<TemplateTaskCategory>();
-            TemplateTaskNewTaskCategoryNavigations = new HashSet<TemplateTaskNew>();
-            TemplateTaskNewTaskSubCategoryNavigations = new HashSet<TemplateTaskNew>();
-            UserTaskTaskGroups = new HashSet<UserTask>();
-            UserTaskTaskSubGroups = new HashSet<UserTask>();
-        }
+        //public TemplateTaskCategory()
+        //{
+        //    InverseParent = new HashSet<TemplateTaskCategory>();
+        //    TemplateTaskNewTaskCategoryNavigations = new HashSet<TemplateTaskNew>();
+        //    TemplateTaskNewTaskSubCategoryNavigations = new HashSet<TemplateTaskNew>();
+        //    UserTaskTaskGroups = new HashSet<UserTask>();
+        //    UserTaskTaskSubGroups = new HashSet<UserTask>();
+        //}
 
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }
