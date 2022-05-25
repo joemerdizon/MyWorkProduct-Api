@@ -44,7 +44,8 @@ namespace MyWorkProduct.Repository.Services
 
         public async Task<User> GetUserByUsername(string username)
         {
-            return await _dbSet.SingleOrDefaultAsync(x => x.Username == username);
+            return await _dbSet.Include(e => e.Role)
+                .SingleOrDefaultAsync(x => x.Username == username);
         }
 
         public override Task<bool> Upsert(User entity)
