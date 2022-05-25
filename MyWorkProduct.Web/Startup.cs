@@ -35,7 +35,7 @@ namespace MyWorkProduct.Web
             services.AddDbContext<MyWorkProductDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MyWorkProduct.Web", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MyWorkProduct.API", Version = "v1", Description = "MWorkProduct.API" });
             });
         }
 
@@ -47,7 +47,7 @@ namespace MyWorkProduct.Web
                 IdentityModelEventSource.ShowPII = true;
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyWorkProduct.Web v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyWorkProduct.API v1"));
             }
 
             app.UseHttpsRedirection();
