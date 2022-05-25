@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using MyWorkProduct.Repository.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +11,7 @@ namespace MyWorkProduct.Web.Controllers.Base
 {
     public class BaseController : ControllerBase
     {
+        protected IRepositoryWrapper _repositoryWrapper;
+        protected IConfiguration _configuration;
     }
 }

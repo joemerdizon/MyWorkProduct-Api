@@ -12,6 +12,7 @@ namespace MyWorkProduct.Repository.Services
     {
         private MyWorkProductDbContext _dbContext;
         private IUserRepository _userRepository;
+        private ITemplateTaskCategoryRepository _templateTaskCategoryRepository;
 
         public RepositoryWrapper(MyWorkProductDbContext dbContext)
         {
@@ -24,6 +25,16 @@ namespace MyWorkProduct.Repository.Services
                 if (_userRepository == null)
                     _userRepository = new UserRepository(_dbContext);
                 return _userRepository;
+            }
+        }
+
+        public ITemplateTaskCategoryRepository TemplateTaskCategoryRepository
+        {
+            get
+            {
+                if (_templateTaskCategoryRepository == null)
+                    _templateTaskCategoryRepository = new TemplateTaskCategoryRepository(_dbContext);
+                return _templateTaskCategoryRepository;
             }
         }
     }

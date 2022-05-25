@@ -22,8 +22,6 @@ namespace MyWorkProduct.Web.Controllers.Auth
     [ApiController]
     public class AuthController : BaseController
     {
-        protected IRepositoryWrapper _repositoryWrapper;
-        protected IConfiguration _configuration;
         public AuthController(IRepositoryWrapper repositoryWrapper, IConfiguration configuration)
         {
             _repositoryWrapper = repositoryWrapper;
