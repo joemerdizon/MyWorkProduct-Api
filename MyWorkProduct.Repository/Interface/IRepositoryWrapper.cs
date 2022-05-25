@@ -8,6 +8,8 @@ namespace MyWorkProduct.Repository.Interface
 {
     public interface IRepositoryWrapper
     {
-        IUserRepository UserRepository { get;  }
+        IUserRepository UserRepository { get; }
+        ITemplateTaskCategoryRepository TemplateTaskCategoryRepository { get; }
     }
 }
+
