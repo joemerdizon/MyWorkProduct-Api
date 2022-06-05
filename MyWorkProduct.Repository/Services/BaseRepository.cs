@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyWorkProduct.DataAccess.Context;
+using MyWorkProduct.DataAccess.Models;
 using MyWorkProduct.Repository.Interface;
 using System;
 using System.Collections.Generic;

@@ -1246,7 +1246,11 @@ namespace MyWorkProduct.DataAccess.Context
 
                 entity.Property(e => e.ClientId).HasColumnName("ClientID");
 
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
                 entity.Property(e => e.DocumentName).HasMaxLength(1000);
+
+                entity.Property(e => e.LastUpdatedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.TemplateKey).HasMaxLength(50);
 

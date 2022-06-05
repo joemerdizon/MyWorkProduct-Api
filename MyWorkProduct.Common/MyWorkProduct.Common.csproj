@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
-    <Folder Include="Enums\" />
     <Folder Include="Helpers\" />
   </ItemGroup>
 

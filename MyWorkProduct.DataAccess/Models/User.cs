@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace MyWorkProduct.DataAccess.Models
 {
-    public class User
+    public partial class User
     {
-        /*public User()
+        public User()
         {
             CalendarEvents = new HashSet<CalendarEvent>();
             ClientUserRoles = new HashSet<ClientUserRole>();
@@ -63,7 +63,7 @@ namespace MyWorkProduct.DataAccess.Models
             UserTaskTracerUsers = new HashSet<UserTaskTracer>();
             UsersManagerManagers = new HashSet<UsersManager>();
             UsersManagerUsers = new HashSet<UsersManager>();
-        }*/
+        }
 
         public int UserId { get; set; }
         public string FirstName { get; set; }
