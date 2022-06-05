@@ -1,4 +1,5 @@
 ﻿using MyWorkProduct.DataAccess.Context;
+using MyWorkProduct.DataAccess.Models;
 using MyWorkProduct.Repository.Interface;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace MyWorkProduct.Repository.Services
         private MyWorkProductDbContext _dbContext;
         private IUserRepository _userRepository;
         private ITemplateTaskCategoryRepository _templateTaskCategoryRepository;
+        private IReportTemplateRepository _reportTemplateRepository;
 
         public RepositoryWrapper(MyWorkProductDbContext dbContext)
         {
@@ -35,6 +37,16 @@ namespace MyWorkProduct.Repository.Services
                 if (_templateTaskCategoryRepository == null)
                     _templateTaskCategoryRepository = new TemplateTaskCategoryRepository(_dbContext);
                 return _templateTaskCategoryRepository;
+            }
+        }
+
+        public IReportTemplateRepository ReportTemplateRepository
+        {
+            get
+            {
+                if (_reportTemplateRepository == null)
+                    _reportTemplateRepository = new ReportTemplateRepository(_dbContext);
+                return _reportTemplateRepository;
             }
         }
     }

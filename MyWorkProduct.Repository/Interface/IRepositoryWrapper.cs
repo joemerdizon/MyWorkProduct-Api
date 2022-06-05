@@ -10,6 +10,7 @@ namespace MyWorkProduct.Repository.Interface
     {
         IUserRepository UserRepository { get; }
         ITemplateTaskCategoryRepository TemplateTaskCategoryRepository { get; }
+        IReportTemplateRepository ReportTemplateRepository { get;  }
     }
 }
 

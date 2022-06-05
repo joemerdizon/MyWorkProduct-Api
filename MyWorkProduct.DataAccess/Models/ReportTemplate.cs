@@ -22,6 +22,11 @@ namespace MyWorkProduct.DataAccess.Models
         public int? UserTitleId { get; set; }
         public bool? TemplateReport { get; set; }
         public bool? Archive { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public Guid CreatedBy { get; set; }
+        public DateTime LastUpdatedDate { get; set; }
+        public Guid LastUpdatedBy { get; set; }
+        public int Status { get; set; }
 
         public virtual UserTitle UserTitle { get; set; }
         public virtual ICollection<ReportTemplateAssignment> ReportTemplateAssignments { get; set; }
