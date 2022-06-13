@@ -22,6 +22,6 @@ namespace MyWorkProduct.DataAccess.Models
         public int? TempActionItemId { get; set; }
 
         public virtual UserTask Task { get; set; }
-        public virtual TemplateTaskNew TemplateTask { get; set; }
+        public virtual TemplateTask TemplateTask { get; set; }
     }
 }

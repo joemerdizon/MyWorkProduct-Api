@@ -39,9 +39,7 @@ namespace MyWorkProduct.DataAccess.Models
             TeamFavorites = new HashSet<TeamFavorite>();
             TeamMembers = new HashSet<TeamMember>();
             Teams = new HashSet<Team>();
-            TemplateTaskNewCreatorNavigations = new HashSet<TemplateTaskNew>();
             TemplateTaskNewFavorites = new HashSet<TemplateTaskNewFavorite>();
-            TemplateTaskNewTemplateApproverNavigations = new HashSet<TemplateTaskNew>();
             UserConfigurations = new HashSet<UserConfiguration>();
             UserDocumentPermissions = new HashSet<UserDocumentPermission>();
             UserMessagingFromUsers = new HashSet<UserMessaging>();
@@ -131,9 +129,7 @@ namespace MyWorkProduct.DataAccess.Models
         public virtual ICollection<TeamFavorite> TeamFavorites { get; set; }
         public virtual ICollection<TeamMember> TeamMembers { get; set; }
         public virtual ICollection<Team> Teams { get; set; }
-        public virtual ICollection<TemplateTaskNew> TemplateTaskNewCreatorNavigations { get; set; }
         public virtual ICollection<TemplateTaskNewFavorite> TemplateTaskNewFavorites { get; set; }
-        public virtual ICollection<TemplateTaskNew> TemplateTaskNewTemplateApproverNavigations { get; set; }
         public virtual ICollection<UserConfiguration> UserConfigurations { get; set; }
         public virtual ICollection<UserDocumentPermission> UserDocumentPermissions { get; set; }
         public virtual ICollection<UserMessaging> UserMessagingFromUsers { get; set; }

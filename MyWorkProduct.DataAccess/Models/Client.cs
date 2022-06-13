@@ -18,7 +18,6 @@ namespace MyWorkProduct.DataAccess.Models
             OrganizationHierarchies = new HashSet<OrganizationHierarchy>();
             Teams = new HashSet<Team>();
             TemplateTaskCategories = new HashSet<TemplateTaskCategory>();
-            TemplateTaskNews = new HashSet<TemplateTaskNew>();
             UserStorageAccountTypes = new HashSet<UserStorageAccountType>();
             UserTitles = new HashSet<UserTitle>();
             Users = new HashSet<User>();
@@ -48,7 +47,6 @@ namespace MyWorkProduct.DataAccess.Models
         public virtual ICollection<OrganizationHierarchy> OrganizationHierarchies { get; set; }
         public virtual ICollection<Team> Teams { get; set; }
         public virtual ICollection<TemplateTaskCategory> TemplateTaskCategories { get; set; }
-        public virtual ICollection<TemplateTaskNew> TemplateTaskNews { get; set; }
         public virtual ICollection<UserStorageAccountType> UserStorageAccountTypes { get; set; }
         public virtual ICollection<UserTitle> UserTitles { get; set; }
         public virtual ICollection<User> Users { get; set; }

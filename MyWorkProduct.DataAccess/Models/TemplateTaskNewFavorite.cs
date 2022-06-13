@@ -11,7 +11,7 @@ namespace MyWorkProduct.DataAccess.Models
         public int TemplateTaskNewId { get; set; }
         public int UserId { get; set; }
 
-        public virtual TemplateTaskNew TemplateTaskNew { get; set; }
+        public virtual TemplateTask TemplateTaskNew { get; set; }
         public virtual User User { get; set; }
     }
 }

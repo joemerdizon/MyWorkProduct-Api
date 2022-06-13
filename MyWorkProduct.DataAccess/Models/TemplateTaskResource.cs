@@ -13,6 +13,6 @@ namespace MyWorkProduct.DataAccess.Models
         public int? TaskId { get; set; }
         public int? Question { get; set; }
 
-        public virtual TemplateTaskNew Task { get; set; }
+        public virtual TemplateTask Task { get; set; }
     }
 }

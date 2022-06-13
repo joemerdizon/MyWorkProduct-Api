@@ -68,6 +68,7 @@ namespace MyWorkProduct.DataAccess.Context
         public virtual DbSet<ReportTemplateFavorite> ReportTemplateFavorites { get; set; }
         public virtual DbSet<ReportTemplateLog> ReportTemplateLogs { get; set; }
         public virtual DbSet<ReportTemplateSection> ReportTemplateSections { get; set; }
+        public virtual DbSet<ReportTemplateTask> ReportTemplateTasks { get; set; }
         public virtual DbSet<ResetAudit> ResetAudits { get; set; }
         public virtual DbSet<Resource> Resources { get; set; }
         public virtual DbSet<ResourceAvailStatus> ResourceAvailStatuses { get; set; }
@@ -80,15 +81,14 @@ namespace MyWorkProduct.DataAccess.Context
         public virtual DbSet<SqueezeAggregate> SqueezeAggregates { get; set; }
         public virtual DbSet<StorageAccountType> StorageAccountTypes { get; set; }
         public virtual DbSet<TaskOwnerLookup> TaskOwnerLookups { get; set; }
-        public virtual DbSet<TaskReportTemplate> TaskReportTemplates { get; set; }
         public virtual DbSet<TaskStatus> TaskStatuses { get; set; }
         public virtual DbSet<TaskType> TaskTypes { get; set; }
         public virtual DbSet<Team> Teams { get; set; }
         public virtual DbSet<TeamFavorite> TeamFavorites { get; set; }
         public virtual DbSet<TeamMember> TeamMembers { get; set; }
+        public virtual DbSet<TemplateTask> TemplateTasks { get; set; }
         public virtual DbSet<TemplateTaskCategory> TemplateTaskCategories { get; set; }
         public virtual DbSet<TemplateTaskCategoryType> TemplateTaskCategoryTypes { get; set; }
-        public virtual DbSet<TemplateTaskNew> TemplateTaskNews { get; set; }
         public virtual DbSet<TemplateTaskNewFavorite> TemplateTaskNewFavorites { get; set; }
         public virtual DbSet<TemplateTaskPlaybookDocument> TemplateTaskPlaybookDocuments { get; set; }
         public virtual DbSet<TemplateTaskResource> TemplateTaskResources { get; set; }
@@ -1364,9 +1364,7 @@ namespace MyWorkProduct.DataAccess.Context
 
             modelBuilder.Entity<ReportTemplateSection>(entity =>
             {
-                entity.HasKey(e => e.SectionId);
-
-                entity.Property(e => e.SectionId).HasColumnName("SectionID");
+                entity.Property(e => e.ReportTemplateSectionId).HasColumnName("ReportTemplateSectionID");
 
                 entity.Property(e => e.Description).IsUnicode(false);
 
@@ -1374,12 +1372,50 @@ namespace MyWorkProduct.DataAccess.Context
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
-                entity.Property(e => e.TemplateReportId).HasColumnName("TemplateReportID");
+                entity.Property(e => e.ReportTemplateId).HasColumnName("ReportTemplateID");
 
-                entity.HasOne(d => d.TemplateReport)
+                entity.HasOne(d => d.ReportTemplate)
                     .WithMany(p => p.ReportTemplateSections)
-                    .HasForeignKey(d => d.TemplateReportId)
+                    .HasForeignKey(d => d.ReportTemplateId)
                     .HasConstraintName("FK_dbo.ReportTemplateSections_dbo.ReportTemplates");
+            });
+
+            modelBuilder.Entity<ReportTemplateTask>(entity =>
+            {
+                entity.Property(e => e.ReportTemplateTaskId).HasColumnName("ReportTemplateTaskID");
+
+                entity.Property(e => e.ClientId).HasColumnName("ClientID");
+
+                entity.Property(e => e.DueDate)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ReportTemplateSectionId).HasColumnName("ReportTemplateSectionID");
+
+                entity.Property(e => e.Roles).HasMaxLength(1000);
+
+                entity.Property(e => e.RowId).HasColumnName("RowID");
+
+                entity.Property(e => e.TaskDocRef).HasColumnType("decimal(18, 3)");
+
+                entity.Property(e => e.TemplateKey).HasMaxLength(50);
+
+                entity.Property(e => e.TemplateTaskId).HasColumnName("TemplateTaskID");
+
+                entity.Property(e => e.TimeUnit)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.ReportTemplateSection)
+                    .WithMany(p => p.ReportTemplateTasks)
+                    .HasForeignKey(d => d.ReportTemplateSectionId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_dbo.ReportTemplateSections_dbo.ReportTemplateSections");
+
+                entity.HasOne(d => d.TemplateTask)
+                    .WithMany(p => p.ReportTemplateTasks)
+                    .HasForeignKey(d => d.TemplateTaskId)
+                    .HasConstraintName("FK_dbo.ReportTemplateTasks_dbo.TemplateTasks");
             });
 
             modelBuilder.Entity<ResetAudit>(entity =>
@@ -1588,44 +1624,6 @@ namespace MyWorkProduct.DataAccess.Context
                     .HasMaxLength(50);
             });
 
-            modelBuilder.Entity<TaskReportTemplate>(entity =>
-            {
-                entity.HasKey(e => e.RowId);
-
-                entity.Property(e => e.RowId).HasColumnName("RowID");
-
-                entity.Property(e => e.ClientId).HasColumnName("ClientID");
-
-                entity.Property(e => e.DueDate)
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Roles).HasMaxLength(1000);
-
-                entity.Property(e => e.SectionId).HasColumnName("SectionID");
-
-                entity.Property(e => e.TaskDocRef).HasColumnType("decimal(18, 3)");
-
-                entity.Property(e => e.TemplateKey).HasMaxLength(50);
-
-                entity.Property(e => e.TemplateTaskId).HasColumnName("TemplateTaskID");
-
-                entity.Property(e => e.TimeUnit)
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
-
-                entity.HasOne(d => d.Section)
-                    .WithMany(p => p.TaskReportTemplates)
-                    .HasForeignKey(d => d.SectionId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_dbo.ReportTemplateSections_dbo.ReportTemplateSections");
-
-                entity.HasOne(d => d.TemplateTask)
-                    .WithMany(p => p.TaskReportTemplates)
-                    .HasForeignKey(d => d.TemplateTaskId)
-                    .HasConstraintName("FK_dbo.TaskReportTemplates_dbo.TemplateTaskNew");
-            });
-
             modelBuilder.Entity<TaskStatus>(entity =>
             {
                 entity.Property(e => e.TaskStatusId).HasColumnName("TaskStatusID");
@@ -1713,6 +1711,30 @@ namespace MyWorkProduct.DataAccess.Context
                     .HasConstraintName("FK_TeamMembers_Users");
             });
 
+            modelBuilder.Entity<TemplateTask>(entity =>
+            {
+                entity.Property(e => e.TemplateTaskId).HasColumnName("TemplateTaskID");
+
+                entity.Property(e => e.Archive)
+                    .IsRequired()
+                    .HasDefaultValueSql("('false')");
+
+                entity.Property(e => e.Assignable)
+                    .IsRequired()
+                    .HasDefaultValueSql("('false')");
+
+                entity.Property(e => e.ClientId).HasColumnName("ClientID");
+
+                entity.Property(e => e.ParentId).HasColumnName("ParentID");
+
+                entity.Property(e => e.TaskCreated).HasColumnType("datetime");
+
+                entity.HasOne(d => d.Parent)
+                    .WithMany(p => p.InverseParent)
+                    .HasForeignKey(d => d.ParentId)
+                    .HasConstraintName("FK_TemplateTask_ActionItems");
+            });
+
             modelBuilder.Entity<TemplateTaskCategory>(entity =>
             {
                 entity.HasKey(e => e.CategoryId);
@@ -1756,59 +1778,6 @@ namespace MyWorkProduct.DataAccess.Context
                 entity.Property(e => e.CategoryTypeId).HasColumnName("CategoryTypeID");
 
                 entity.Property(e => e.CategoryTypeName).HasMaxLength(1000);
-            });
-
-            modelBuilder.Entity<TemplateTaskNew>(entity =>
-            {
-                entity.HasKey(e => e.TaskId);
-
-                entity.ToTable("TemplateTaskNew");
-
-                entity.Property(e => e.TaskId).HasColumnName("TaskID");
-
-                entity.Property(e => e.Archive)
-                    .IsRequired()
-                    .HasDefaultValueSql("('false')");
-
-                entity.Property(e => e.Assignable)
-                    .IsRequired()
-                    .HasDefaultValueSql("('false')");
-
-                entity.Property(e => e.ClientId).HasColumnName("ClientID");
-
-                entity.Property(e => e.ParentId).HasColumnName("ParentID");
-
-                entity.Property(e => e.TaskCreated).HasColumnType("datetime");
-
-                entity.HasOne(d => d.Client)
-                    .WithMany(p => p.TemplateTaskNews)
-                    .HasForeignKey(d => d.ClientId)
-                    .HasConstraintName("FK_TemplateTaskNew_Clients");
-
-                entity.HasOne(d => d.CreatorNavigation)
-                    .WithMany(p => p.TemplateTaskNewCreatorNavigations)
-                    .HasForeignKey(d => d.Creator)
-                    .HasConstraintName("FK_TemplateTaskNew_UserCreator");
-
-                entity.HasOne(d => d.Parent)
-                    .WithMany(p => p.InverseParent)
-                    .HasForeignKey(d => d.ParentId)
-                    .HasConstraintName("FK_TemplateTaskNew_ActionItems");
-
-                entity.HasOne(d => d.TaskCategoryNavigation)
-                    .WithMany(p => p.TemplateTaskNewTaskCategoryNavigations)
-                    .HasForeignKey(d => d.TaskCategory)
-                    .HasConstraintName("FK_TemplateTaskNew_TemplateTaskCategory");
-
-                entity.HasOne(d => d.TaskSubCategoryNavigation)
-                    .WithMany(p => p.TemplateTaskNewTaskSubCategoryNavigations)
-                    .HasForeignKey(d => d.TaskSubCategory)
-                    .HasConstraintName("FK_TemplateTaskNew_TemplateTaskSubCategory");
-
-                entity.HasOne(d => d.TemplateApproverNavigation)
-                    .WithMany(p => p.TemplateTaskNewTemplateApproverNavigations)
-                    .HasForeignKey(d => d.TemplateApprover)
-                    .HasConstraintName("FK_TemplateTaskNew_Users");
             });
 
             modelBuilder.Entity<TemplateTaskNewFavorite>(entity =>

@@ -11,6 +11,6 @@ namespace MyWorkProduct.DataAccess.Models
         public int DocumentId { get; set; }
 
         public virtual PlaybookDocument Document { get; set; }
-        public virtual TemplateTaskNew Task { get; set; }
+        public virtual TemplateTask Task { get; set; }
     }
 }
