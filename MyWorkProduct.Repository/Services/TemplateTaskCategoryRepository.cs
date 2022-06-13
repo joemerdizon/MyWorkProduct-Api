@@ -17,7 +17,7 @@ namespace MyWorkProduct.Repository.Services
         {
 
         }
-        public override Task<bool> Add(TemplateTaskCategory entity)
+        public override Task<TemplateTaskCategory> Add(TemplateTaskCategory entity)
         {
             return base.Add(entity);
         }

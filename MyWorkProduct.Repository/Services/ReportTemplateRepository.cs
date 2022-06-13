@@ -17,7 +17,7 @@ namespace MyWorkProduct.Repository.Services
         {
 
         }
-        public override Task<bool> Add(ReportTemplate entity)
+        public override Task<ReportTemplate> Add(ReportTemplate entity)
         {
             return base.Add(entity);
         }

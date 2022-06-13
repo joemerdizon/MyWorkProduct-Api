@@ -17,7 +17,7 @@ namespace MyWorkProduct.Repository.Services
         {
 
         }
-        public override Task<bool> Add(User entity)
+        public override Task<User> Add(User entity)
         {
             return base.Add(entity);
         }

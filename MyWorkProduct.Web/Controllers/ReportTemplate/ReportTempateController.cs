@@ -3,12 +3,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using MyWorkProduct.Common.DTO.ReportTemplate;
+using MyWorkProduct.Common.DTO.ReportTemplate.CreateReportTemplate;
 using MyWorkProduct.Repository.Interface;
 using MyWorkProduct.Web.Controllers.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Models = MyWorkProduct.DataAccess.Models;
 
 namespace MyWorkProduct.Web.Controllers.ReportTemplate
 {
@@ -47,6 +49,17 @@ namespace MyWorkProduct.Web.Controllers.ReportTemplate
             var responseData = _mapper.Map<ReportTemplateDto>(reportTemplate);
 
             return StatusCode(StatusCodes.Status200OK, responseData);
+        }
+
+        [HttpPost]
+        [Route("CreateReportTemplate")]
+        public async Task<ActionResult<object>> CreateReportTemplate([FromBody] CreateReportTemplateRequestDto requestDto)
+        {
+            var reportTemplate = _mapper.Map<Models.ReportTemplate>(requestDto);
+
+            var responseData = await _repositoryWrapper.ReportTemplateRepository.Add(reportTemplate);
+
+            return StatusCode(StatusCodes.Status201Created, "Report Template Added");
         }
     }
 }

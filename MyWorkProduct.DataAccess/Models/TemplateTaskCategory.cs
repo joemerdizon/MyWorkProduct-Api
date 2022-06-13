@@ -10,8 +10,6 @@ namespace MyWorkProduct.DataAccess.Models
         public TemplateTaskCategory()
         {
             InverseParent = new HashSet<TemplateTaskCategory>();
-            TemplateTaskNewTaskCategoryNavigations = new HashSet<TemplateTaskNew>();
-            TemplateTaskNewTaskSubCategoryNavigations = new HashSet<TemplateTaskNew>();
             UserTaskTaskGroups = new HashSet<UserTask>();
             UserTaskTaskSubGroups = new HashSet<UserTask>();
         }
@@ -32,8 +30,6 @@ namespace MyWorkProduct.DataAccess.Models
         public virtual Client Client { get; set; }
         public virtual TemplateTaskCategory Parent { get; set; }
         public virtual ICollection<TemplateTaskCategory> InverseParent { get; set; }
-        public virtual ICollection<TemplateTaskNew> TemplateTaskNewTaskCategoryNavigations { get; set; }
-        public virtual ICollection<TemplateTaskNew> TemplateTaskNewTaskSubCategoryNavigations { get; set; }
         public virtual ICollection<UserTask> UserTaskTaskGroups { get; set; }
         public virtual ICollection<UserTask> UserTaskTaskSubGroups { get; set; }
     }

@@ -62,7 +62,7 @@ namespace MyWorkProduct.DataAccess.Models
         public virtual TaskStatus TaskStatus { get; set; }
         public virtual TemplateTaskCategory TaskSubGroup { get; set; }
         public virtual TaskType TaskTypeNavigation { get; set; }
-        public virtual TemplateTaskNew TemplateTask { get; set; }
+        public virtual TemplateTask TemplateTask { get; set; }
         public virtual ICollection<CalendarEvent> CalendarEvents { get; set; }
         public virtual ICollection<UserTask> InverseParent { get; set; }
         public virtual ICollection<UserSqueeze> UserSqueezes { get; set; }

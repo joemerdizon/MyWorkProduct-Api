@@ -37,10 +37,21 @@ namespace MyWorkProduct.Web
             services.AddDbContext<MyWorkProductDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddSwaggerGen(c =>
             {
+                c.EnableAnnotations();
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MyWorkProduct.API", Version = "v1", Description = "MWorkProduct.API" });
             });
 
-            services.AddAutoMapper(typeof(ReportTemplateProfile)); 
+            services.AddAutoMapper(typeof(ReportTemplateProfile));
+            // CORS
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CORS", policy =>
+                {
+                    policy.WithOrigins("http://localhost:3000")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,6 +70,8 @@ namespace MyWorkProduct.Web
 
             app.UseHttpsRedirection();
 
+            app.UseCors("CORS");
+
             app.UseRouting();
 
             app.UseAuthorization();
@@ -67,6 +80,7 @@ namespace MyWorkProduct.Web
             {
                 endpoints.MapControllers();
             });
+
         }
     }
 }

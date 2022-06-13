@@ -9,16 +9,16 @@ namespace MyWorkProduct.DataAccess.Models
     {
         public ReportTemplateSection()
         {
-            TaskReportTemplates = new HashSet<TaskReportTemplate>();
+            ReportTemplateTasks = new HashSet<ReportTemplateTask>();
         }
 
-        public int SectionId { get; set; }
+        public int ReportTemplateSectionId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public int? TemplateReportId { get; set; }
+        public int? ReportTemplateId { get; set; }
         public int? Order { get; set; }
 
-        public virtual ReportTemplate TemplateReport { get; set; }
-        public virtual ICollection<TaskReportTemplate> TaskReportTemplates { get; set; }
+        public virtual ReportTemplate ReportTemplate { get; set; }
+        public virtual ICollection<ReportTemplateTask> ReportTemplateTasks { get; set; }
     }
 }

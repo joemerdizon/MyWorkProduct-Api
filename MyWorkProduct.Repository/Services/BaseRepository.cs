@@ -20,9 +20,11 @@ namespace MyWorkProduct.Repository.Services
             _context = context;
             _dbSet = context.Set<T>();
         }
-        public virtual Task<bool> Add(T entity)
+        public async virtual Task<T> Add(T entity)
         {
-            throw new NotImplementedException();
+            _dbSet.Add(entity);
+            await _context.SaveChangesAsync();
+            return entity;
         }
 
         public virtual Task<bool> Delete(Guid id)
